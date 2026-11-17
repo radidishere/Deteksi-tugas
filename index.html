@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <!-- viewport: supaya tampilan pas di layar HP -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="description" content="Pengingat tugas sekolah yang bisa dipakai tanpa internet">
+  <title>TugasKu</title>
+
+  <!-- manifest: "kartu identitas" aplikasi supaya bisa diinstal -->
+  <link rel="manifest" href="manifest.json">
+  <!-- ikon untuk iPhone -->
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <!-- file tampilan -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <h1>📚 TugasKu</h1>
+    <!-- isi tanggal diisi oleh JavaScript -->
+    <p id="tanggal-hari-ini"></p>
+  </header>
+
+  <main class="isi">
+
+    <!-- ===== RINGKASAN ===== -->
+    <section class="ringkasan" aria-label="Ringkasan tugas">
+      <div class="kotak">
+        <strong id="jml-aktif">0</strong>
+        <span>Aktif</span>
+      </div>
+      <div class="kotak kotak-merah">
+        <strong id="jml-terlambat">0</strong>
+        <span>Terlambat</span>
+      </div>
+      <div class="kotak kotak-hijau">
+        <strong id="jml-selesai">0</strong>
+        <span>Selesai</span>
+      </div>
+    </section>
+
+    <!-- ===== FORMULIR TAMBAH / EDIT TUGAS ===== -->
+    <section class="panel" id="panel-form">
+      <h2 id="judul-form">Tambah Tugas</h2>
+
+      <form id="form-tugas">
+        <label for="input-judul">Nama tugas</label>
+        <input type="text" id="input-judul" maxlength="80" required
+               placeholder="Contoh: Laporan praktikum jaringan">
+
+        <label for="input-mapel">Mata pelajaran</label>
+        <input type="text" id="input-mapel" maxlength="50" required
+               placeholder="Contoh: Pemrograman Web">
+
+        <label for="input-guru">Guru pemberi tugas</label>
+        <!-- list="daftar-guru" menghubungkan kolom ini dengan saran nama di bawah -->
+        <input type="text" id="input-guru" maxlength="50" required
+               list="daftar-guru" placeholder="Contoh: Bu Sari">
+        <datalist id="daftar-guru"></datalist>
+
+        <label for="input-tenggat">Tenggat pengumpulan</label>
+        <input type="datetime-local" id="input-tenggat" required>
+
+        <label for="input-catatan">Catatan tambahan (boleh kosong)</label>
+        <textarea id="input-catatan" rows="3" maxlength="300"
+                  placeholder="Contoh: Dikumpulkan PDF lewat Google Classroom"></textarea>
+
+        <div class="baris-tombol">
+          <button type="submit" id="tombol-simpan" class="tombol tombol-utama">Simpan</button>
+          <!-- tombol ini hanya muncul saat sedang mengedit -->
+          <button type="button" id="tombol-batal" class="tombol" hidden>Batal</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== FILTER ===== -->
+    <section class="filter" aria-label="Filter tugas">
+      <label>
+        Status
+        <select id="filter-status">
+          <option value="semua">Semua</option>
+          <option value="belum">Belum selesai</option>
+          <option value="selesai">Selesai</option>
+        </select>
+      </label>
+      <label>
+        Guru
+        <select id="filter-guru">
+          <option value="semua">Semua guru</option>
+        </select>
+      </label>
+    </section>
+
+    <!-- ===== DAFTAR TUGAS (diisi oleh JavaScript) ===== -->
+    <ul id="daftar-tugas" class="daftar"></ul>
+    <p id="kosong" class="kosong" hidden>Belum ada tugas. Yuk tambah tugas pertamamu! 🎉</p>
+
+  </main>
+
+  <footer class="footer">
+    Data tersimpan di HP-mu sendiri dan bisa dibuka tanpa internet.
+  </footer>
+
+  <!-- file JavaScript dipanggil paling bawah supaya semua elemen di atas sudah ada -->
+  <script src="app.js"></script>
+</body>
+</html>
